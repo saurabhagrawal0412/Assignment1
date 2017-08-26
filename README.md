@@ -26,4 +26,6 @@ This service is written in Java and uses [Spring Boot](https://projects.spring.i
 ### Database set up
 1) [Install MySQL Workbench](https://dev.mysql.com/doc/workbench/en/wb-installing.html) for your operating system
 1) Run the [database scripts](https://github.com/saurabhagrawal0412/Assignment1/tree/master/db_scripts) on MySQL workbench
+1) Clone the [repository](https://github.com/saurabhagrawal0412/Assignment1.git)
 1) Follow the steps in individual README
+1) `cd` to **UI** directory and run the webpage **index.html**
