@@ -12,9 +12,9 @@ const app = express();
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'auth_user',
+  user     : 'authorization_user',
   password : 'password',
-  database : 'auth',
+  database : 'authorization-db',
   port     : 3306
 });
 connection.connect();
@@ -46,7 +46,6 @@ app.use("/id/:id/:resource", function (req, res, next) {
     if (! isAuthorized) {
         res.status(401).send("Unauthorized for accessing resource");
     } else {
-      console.log("Is authorized");
       next();
     }
   });
@@ -62,7 +61,6 @@ app.get('/id/:id/:resource', function (req, res) {
   var queryString = "http://localhost:8080/get_resource?resource_id=" + resource;
   request(queryString, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      console.log(body) // Print the google web page.
       res.status(response.statusCode).send(body);
     }
   });
