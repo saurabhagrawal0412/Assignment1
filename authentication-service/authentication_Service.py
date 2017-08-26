@@ -2,8 +2,8 @@
 # Reference: http://flask.pocoo.org/
 
 from flask import Flask
-import requests
 import mysql.connector
+import requests
 
 app = Flask(__name__)
 
