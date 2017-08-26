@@ -53,19 +53,19 @@ app.use("/id/:id/:resource", function (req, res, next) {
 });
 
 /**
- * GET endpoint for resource 1
+ * GET endpoint for resources
  */
-app.get('/id/:id/resource1', function (req, res) {
-  console.log("Resource 1");
-  res.send("Resource 1");
-});
-
-/**
- * GET endpoint for resource 2
- */
-app.get('/id/:id/resource2', function (req, res) {
-  console.log("Resource 2");
-  res.send("Resource 2");
+app.get('/id/:id/:resource', function (req, res) {
+  var id = req.params.id;
+  var resource = req.params.resource;
+  var request = require('request');
+  var queryString = "http://localhost:8080/get_resource?resource_id=" + resource;
+  request(queryString, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log(body) // Print the google web page.
+      res.status(response.statusCode).send(body);
+    }
+  });
 });
 
 /**
