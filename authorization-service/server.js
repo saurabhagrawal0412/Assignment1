@@ -19,6 +19,8 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
+const RESOURCE_SERVER_HOST = "localhost";
+const RESOURCE_SERVER_PORT = 8080;
 /**
  * Local function to check if the user is authorized to access a resource
  */
@@ -57,8 +59,11 @@ app.use("/id/:id/:resource", function (req, res, next) {
 app.get('/id/:id/:resource', function (req, res) {
   var id = req.params.id;
   var resource = req.params.resource;
+  const util = require("util");
+  var queryString = util.format("http://%s:%d/get_resource?resource_id=%s", 
+                                RESOURCE_SERVER_HOST, RESOURCE_SERVER_PORT, resource);
+  console.log("queryString -> " + queryString);
   var request = require('request');
-  var queryString = "http://localhost:8080/get_resource?resource_id=" + resource;
   request(queryString, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.status(response.statusCode).send(body);
